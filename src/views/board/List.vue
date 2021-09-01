@@ -12,7 +12,8 @@
 
       <tbody>
       <tr v-for="(row, idx) in list" :key="idx">
-        <td>{{ no - idx }}</td>
+<!--        <td>{{ no - idx }}</td>-->
+        <td>{{ row.idx }}</td>
         <td>{{ row.title }}</td>
         <td>{{ row.author }}</td>
         <td>{{ row.createdAt }}</td>
@@ -60,28 +61,16 @@ export default {
       //   page: this.page,
       //   size: this.size
       // }
+      this.$axios.get("http://localhost:8080/board/list")
+      .then((res) => {
+        console.log(res.data)
+        this.list = res.data
+        this.no = res.data.length
+      })
+      .then((err) => {
+        console.log(err)
+      });
 
-      this.no = 3
-      this.list = [
-        {
-          idx: 3,
-          title: '게시글3',
-          author: '작성자3',
-          createdAt: '2021-08-24 23:30:00'
-        },
-        {
-          idx: 2,
-          title: '게시글2',
-          author: '작성자2',
-          createdAt: '2021-08-24 23:20:00'
-        },
-        {
-          idx: 1,
-          title: '게시글1',
-          author: '작성자1',
-          createdAt: '2021-08-24 23:10:00'
-        }
-      ]
     },
 
   }
